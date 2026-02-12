@@ -7,6 +7,9 @@ export default function TechStack() {
     "TypeScript",
     "Tailwind CSS",
     "Framer Motion",
+    "OpenAI API",
+    "React Hook Form",
+    "Zod",
   ];
 
   return (
