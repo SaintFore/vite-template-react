@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import TechBadge from "./semantic/TechBadge";
 
 export default function TechStack() {
   const stack = [
@@ -10,6 +11,7 @@ export default function TechStack() {
     "OpenAI API",
     "React Hook Form",
     "Zod",
+    "Shadcn UI",
   ];
 
   return (
@@ -17,32 +19,24 @@ export default function TechStack() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="flex flex-wrap gap-3"
       variants={{
+        hidden: {},
         show: {
           transition: { staggerChildren: 0.08 },
         },
       }}
+      className="flex flex-wrap justify-center gap-4 max-w-2xl"
     >
       {stack.map((item) => (
         <motion.li
           key={item}
           variants={{
-            hidden: { opacity: 0, y: 12 },
+            hidden: { opacity: 0, y: 20 },
             show: { opacity: 1, y: 0 },
           }}
-          whileHover={{ scale: 1.06 }}
-          transition={{ type: "spring", damping: 18 }}
-          className="
-            rounded-full
-            border border-white/10
-            bg-white/5
-            px-4 py-1.5
-            text-sm text-zinc-200
-            cursor-default
-          "
+          transition={{ type: "spring", stiffness: 120 }}
         >
-          {item}
+          <TechBadge>{item}</TechBadge>
         </motion.li>
       ))}
     </motion.ul>
