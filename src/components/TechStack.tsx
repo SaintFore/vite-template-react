@@ -12,6 +12,8 @@ export default function TechStack() {
     "React Hook Form",
     "Zod",
     "Shadcn UI",
+    "Query Query",
+    "React Router",
   ];
 
   return (
