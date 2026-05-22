@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import LandingPage from "./pages/LandingPage";
 
 const ItemsPage = lazy(() => import("./pages/ItemsPage"));
@@ -13,26 +14,20 @@ function PageFallback() {
   );
 }
 
+function withSuspense(children: React.ReactNode) {
+  return <Suspense fallback={<PageFallback />}>{children}</Suspense>;
+}
+
 const router = createBrowserRouter([
   { path: "/", element: <LandingPage /> },
-  {
-    path: "/items",
-    element: (
-      <Suspense fallback={<PageFallback />}>
-        <ItemsPage />
-      </Suspense>
-    ),
-  },
-  {
-    path: "*",
-    element: (
-      <Suspense fallback={<PageFallback />}>
-        <NotFoundPage />
-      </Suspense>
-    ),
-  },
+  { path: "/items", element: withSuspense(<ItemsPage />) },
+  { path: "*", element: withSuspense(<NotFoundPage />) },
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
+  );
 }
